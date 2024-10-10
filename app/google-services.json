@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "170059268264",
+    "project_id": "naga-park-master",
+    "storage_bucket": "naga-park-master.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170059268264:android:151fc459b756d168a4829d",
+        "android_client_info": {
+          "package_name": "com.example.nagaparkmaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEH6ZwHip3IlZwYqPjYT8gFhbc2kVdZ3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
