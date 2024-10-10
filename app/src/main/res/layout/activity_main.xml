@@ -18,15 +18,14 @@
         <LinearLayout
             android:id="@+id/logo_container"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView_login_header"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:layout_marginTop="25dp"
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/nagaparkmaster01" />
         </LinearLayout>
 
@@ -50,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:text="PARK ON THE NEARBY"
+                android:text="PARK NEARBY YOUR LOCATION"
                 android:textAlignment="center"
                 android:textSize="12dp"
                 />
@@ -63,8 +62,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_text_bg"
-                android:drawableLeft="@drawable/email2"
-                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/drawable_left_icon_email"
+                android:drawablePadding="10dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
@@ -83,8 +82,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/edit_text_bg"
-                android:drawableLeft="@drawable/pw2"
-                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/drawable_left_icon_pw"
+                android:drawablePadding="10dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="15dp"
@@ -128,7 +127,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_height="37dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
@@ -136,33 +135,33 @@
 
                 <TextView
                     android:id="@+id/textView_forgot_password"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Forgot Password?"
-                    android:textColor="@color/base_color"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/base_color" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView_no_account_label"
-                    android:layout_width="423dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
+                    android:textAlignment="textEnd"
                     android:text="Don't have account?"
-                    android:textAlignment="textEnd" />
+                   />
 
                 <TextView
                     android:id="@+id/textView_create_account"
-                    android:layout_width="match_parent"
+                    android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"

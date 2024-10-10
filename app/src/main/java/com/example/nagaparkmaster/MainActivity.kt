@@ -2,6 +2,7 @@ package com.example.nagaparkmaster
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         val btn = findViewById<Button>(R.id.buttonSignIn);
         val text_signup = findViewById<TextView>(R.id.textView_create_account);
+
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics);
+
+        val textview_signup_params = text_signup.layoutParams
+        textview_signup_params.width = displayMetrics.widthPixels/7;
 
         btn.setOnClickListener {
 
