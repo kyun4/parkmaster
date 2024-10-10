@@ -101,14 +101,14 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/textview_companion_username"
+                    android:id="@+id/textview_desired_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_text_bg"
-                    android:drawableLeft="@drawable/drawable_left_icon_phone"
+                    android:drawableLeft="@drawable/drawable_left_icon_user"
                     android:drawablePadding="10dp"
 
                     android:hint="Desired Username"
