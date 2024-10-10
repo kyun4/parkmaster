@@ -217,12 +217,12 @@
 
                     <TextView
                         android:id="@+id/textView_already_have_account_label"
-                        android:layout_width="423dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:text="Already have account?"
-                        android:textAlignment="textEnd" />
+                        />
 
                     <TextView
                         android:id="@+id/textView_login"
