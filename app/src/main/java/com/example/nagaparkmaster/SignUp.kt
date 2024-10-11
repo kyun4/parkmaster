@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -30,14 +31,17 @@ import java.time.format.DateTimeFormatter
 class SignUp : AppCompatActivity() {
 
     private lateinit var auth:FirebaseAuth
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up);
 
         FirebaseApp.initializeApp(this);
-
         auth = FirebaseAuth.getInstance();
+
+
 
         val img_back = findViewById<ImageView>(R.id.imageView_back);
         val textview_login = findViewById<TextView>(R.id.textView_login);
@@ -75,6 +79,8 @@ class SignUp : AppCompatActivity() {
             }else{
                 username = edittext_username.text.toString();
             }
+
+
 
             if(edittext_phone.text.toString().isEmpty()){
                 error_messages += "Please specify your Mobile Phone Number\n";
@@ -114,6 +120,8 @@ class SignUp : AppCompatActivity() {
                 error_messages += "Password mismatch";
             }
 
+            error_messages = getAllUsers(email_input, phone, username);
+
             if(error_messages.equals("")){
                 register(username, "", "","", phone,email_input, password_input);
             }else{
@@ -134,29 +142,88 @@ class SignUp : AppCompatActivity() {
 
     }
 
+
+
     private fun register(username: String, address: String, firstname: String, lastname: String, phone: String,email: String, password: String){
 
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task->
-            if(task.isSuccessful){
+        if(email.isEmpty() || password.isEmpty())
+        {
+            Toast.makeText(this, "Make sure you fill all the details especially Email and Password", Toast.LENGTH_SHORT).show();
 
-                val user = task.result?.user;
+        }else{
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task->
+                if(task.isSuccessful){
+
+                    val user = task.result?.user;
 
 
-                val user_id: String = user?.uid ?: "you-id";
+                    val user_id: String = user?.uid ?: "you-id";
 
-                addUserDetailsToFirebase(username,email,address,user_id,firstname,lastname,phone);
+                    addUserDetailsToFirebase(username,email,address,user_id,firstname,lastname,phone);
 
 
 
-                val intent= Intent(this, MainActivity::class.java);
-                startActivity(intent);
+                    val intent= Intent(this, MainActivity::class.java);
+                    startActivity(intent);
 
-            }else{
-                Toast.makeText(this, "Login Failed "+task.getResult()+"", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(this, "Login Failed "+task.exception?.message.toString()+"", Toast.LENGTH_LONG).show();
+                }
             }
         }
 
+
     } // register
+
+    fun getAllUsers(email: String, phone: String, username: String): String{
+
+
+        var error_messages = "";
+
+        val users_list =  mutableListOf<UsersClass>();
+
+        val database: DatabaseReference;
+
+        database = FirebaseDatabase.getInstance().getReference("/users/");
+
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+
+                var objects =snapshot.children.mapNotNull { child->
+                    child.getValue(UsersClass::class.java);
+                }
+
+                for (dataRecord in objects){
+
+                    users_list.add(dataRecord);
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(baseContext,"Checking Existing Users Cancelled",Toast.LENGTH_LONG).show();
+            }
+        })
+
+        for(users_item in users_list){
+            if(users_item.email.equals(email)){
+                error_messages += "Email Already Exists\n";
+            }
+            if(users_item.phone.equals(phone)){
+                error_messages += "Phone Number Already Exists\n";
+            }
+            if(users_item.username.equals(username)){
+                error_messages += "Username Already Exists\n";
+            }
+        }
+
+        return error_messages;
+
+        //users_list.add(UsersClass("","","","","","","","","",""));
+
+    }
 
     fun addUserDetailsToFirebase(username: String, email: String, address: String, fuid: String, firstname: String, lastname: String, phone: String){
 

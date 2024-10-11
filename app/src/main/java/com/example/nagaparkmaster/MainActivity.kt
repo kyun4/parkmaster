@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,32 +110,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent);
                 finish()
             }else{
-                Toast.makeText(this, "Login Failed: $(task.exception?.message)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login Failed: "+task.exception?.message.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    fun addDataToFirebase(){
 
-
-//
-//        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-//        val myRef: DatabaseReference = database.getReference("/object_detection/object_detected_id_1/current_object/")
-//
-//
-//        myRef.setValue("wall")
-//
-//        myRef.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val value = dataSnapshot.getValue(String::class.java)
-//                println("Value from Firebase: $value")
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                println("Failed to read value: ${error.toException()}")
-//            }
-//        })
-
-    } // addToFirebase
 
 }
