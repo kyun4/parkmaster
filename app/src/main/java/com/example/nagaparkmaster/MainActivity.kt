@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val btn = findViewById<Button>(R.id.buttonSignIn);
+        val text_forgot_password = findViewById<TextView>(R.id.textView_forgot_password);
         val text_signup = findViewById<TextView>(R.id.textView_create_account);
 
         val displayMetrics = DisplayMetrics()
@@ -92,6 +93,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        }
+
+        text_forgot_password.setOnClickListener {
+            val intent = Intent(this, ForgotPassword::class.java);
+            startActivity(intent);
         }
 
         text_signup.setOnClickListener {

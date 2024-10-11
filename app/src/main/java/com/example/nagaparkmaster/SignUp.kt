@@ -120,12 +120,19 @@ class SignUp : AppCompatActivity() {
                 error_messages += "Password mismatch";
             }
 
-            error_messages = getAllUsers(email_input, phone, username);
+            error_messages += getAllUsers(email_input, phone, username);
 
             if(error_messages.equals("")){
                 register(username, "", "","", phone,email_input, password_input);
+
+                edittext_username.setText("");
+                edittext_email.setText("");
+                edittext_phone.setText("");
+                edittext_password.setText("");
+                edittext_retry_password.setText("");
+
             }else{
-                Toast.makeText(this,error_messages, Toast.LENGTH_LONG).show();
+                Toast.makeText(this,error_messages.trim(), Toast.LENGTH_LONG).show();
             }
 
 
@@ -161,10 +168,8 @@ class SignUp : AppCompatActivity() {
 
                     addUserDetailsToFirebase(username,email,address,user_id,firstname,lastname,phone);
 
+                    Toast.makeText(this, "Sign Up Complete! Welcome to Naga Park Master!", Toast.LENGTH_LONG).show();
 
-
-                    val intent= Intent(this, MainActivity::class.java);
-                    startActivity(intent);
 
                 }else{
                     Toast.makeText(this, "Login Failed "+task.exception?.message.toString()+"", Toast.LENGTH_LONG).show();
@@ -203,7 +208,7 @@ class SignUp : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(baseContext,"Checking Existing Users Cancelled",Toast.LENGTH_LONG).show();
+                Toast.makeText(baseContext,"Checking Existing Users Cancelled\nDetails: "+error.message.toString(),Toast.LENGTH_LONG).show();
             }
         })
 
