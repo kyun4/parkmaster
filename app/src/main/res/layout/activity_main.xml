@@ -117,6 +117,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintWidth_percent=".4" />
+
         </LinearLayout>
 
 
@@ -143,6 +144,49 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/buttonSignUpWithGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="@color/base_light_color"
+                android:drawableLeft="@drawable/drawable_left_icon_google"
+                android:drawablePadding="15dp"
+                android:text="Sign up with Google"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_color"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:paddingRight="65dp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".4" />
+
+            <Button
+                android:id="@+id/buttonSignUpWithFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="@color/base_light_color"
+                android:drawableLeft="@drawable/drawable_left_icon_fb"
+                android:text="Sign up with Facebook"
+                android:textAllCaps="false"
+                android:textSize="12dp"
+                android:paddingRight="65dp"
+                android:textAlignment="center"
+                android:textColor="@color/primary_color"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".4" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -153,7 +197,6 @@
                     android:id="@+id/textView_no_account_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:textAlignment="textEnd"
                     android:text="Don't have account?"
@@ -163,9 +206,8 @@
                     android:id="@+id/textView_create_account"
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text=" Signup"
+                    android:text=" Signup Here"
                     android:textColor="@color/base_color" />
 
             </LinearLayout>

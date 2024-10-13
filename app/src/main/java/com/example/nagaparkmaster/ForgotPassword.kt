@@ -2,7 +2,10 @@ package com.example.nagaparkmaster
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Patterns
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -11,6 +14,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -22,6 +26,7 @@ import com.google.firebase.database.ValueEventListener
 class ForgotPassword : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    var users_list =  mutableListOf<UsersClass>();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,13 +36,17 @@ class ForgotPassword : AppCompatActivity() {
         auth = FirebaseAuth.getInstance();
 
 
+
         var email_input = "";
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
 
         val imageview_back = findViewById<ImageView>(R.id.imageView_back_forgot_password);
         val button_send_email = findViewById<Button>(R.id.buttonSendEmailForPasswordReset);
@@ -48,11 +57,12 @@ class ForgotPassword : AppCompatActivity() {
             startActivity(intent);
         }
 
-
+        getAllUsers(button_send_email);
 
             button_send_email.setOnClickListener {
 
                 var error_messages = "";
+                var email_found = 0;
 
                 if(edittext_email.text.toString().isEmpty()){
                     error_messages += "Please specify your last registered e-mail\n";
@@ -65,21 +75,47 @@ class ForgotPassword : AppCompatActivity() {
                     error_messages += "Invalid Email Address Format\n";
                 }
 
-                if(error_messages.equals("")){
-                    error_messages += getAllUsers(email_input);
+                for(user_item_list in users_list){
+                    if(email_input.equals(user_item_list.email)){
+                        email_found += 1;
+                    }
                 }
 
-                if(error_messages.equals("")){
-                    button_send_email.setOnClickListener {
+                if(!email_input.equals(""))
+                {
+                    if(email_found > 0){
 
 
-                        Toast.makeText(this, "Reset Password Link sent to your E-mail\nYou may check now to reset your password!", Toast.LENGTH_LONG).show();
-                        val intent = Intent(this, MainActivity::class.java);
-                        startActivity(intent);
 
-                        edittext_email.setText("");
-
+                    }else{
+                        error_messages += "Email not found!\nNot yet registered? please sign up to continue\n";
+                        Toast.makeText(this, error_messages.trim(),Toast.LENGTH_LONG).show();
                     }
+                }
+
+
+                if(error_messages.equals("")){
+
+
+                        auth.sendPasswordResetEmail(email_input).addOnCompleteListener { task ->
+                            if(task.isSuccessful){
+                                Toast.makeText(this, "Reset Password Link sent to your E-mail\nYou may check now to reset your password!", Toast.LENGTH_LONG).show();
+                                val intent = Intent(this, MainActivity::class.java);
+                                startActivity(intent);
+
+
+
+                                edittext_email.setText("");
+                            }else{
+                                val exception = task.exception;
+                                Toast.makeText(this, "Sending Password Reset Email Failed: "+exception.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+
+
+
+
                 }else{
                     Toast.makeText(this, error_messages.trim(),Toast.LENGTH_LONG).show();
                 }
@@ -90,12 +126,11 @@ class ForgotPassword : AppCompatActivity() {
 
     }
 
-    fun getAllUsers(email: String): String{
+    fun getAllUsers(button_reset_email: Button){
 
 
         var error_messages = "";
 
-        val users_list =  mutableListOf<UsersClass>();
 
         var found_count: Int = 0;
 
@@ -106,16 +141,25 @@ class ForgotPassword : AppCompatActivity() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
+                if(snapshot.exists()){
 
-                var objects =snapshot.children.mapNotNull { child->
-                    child.getValue(UsersClass::class.java);
+
+                    var objects =snapshot.children.mapNotNull { child->
+                        child.getValue(UsersClass::class.java);
+                    }
+
+                    for (dataRecord in objects){
+
+                        users_list.add(dataRecord);
+
+                    }
+
+                    button_reset_email.visibility = View.VISIBLE;
+
+                }else{
+                    button_reset_email.visibility = View.INVISIBLE;
                 }
 
-                for (dataRecord in objects){
-
-                    users_list.add(dataRecord);
-
-                }
 
             }
 
@@ -124,24 +168,7 @@ class ForgotPassword : AppCompatActivity() {
             }
         })
 
-        for(users_item in users_list){
-            if(users_item.email.equals(email)){
-                found_count+=1;
-            }
-        }
 
-        if(found_count > 0)
-        {
-
-        }else{
-            error_messages += "Email Address not Register on this App\nYou may Sign-Up first to continue";
-        }
-
-        if(email.trim().equals("") || email.trim().isEmpty()){
-            error_messages = "";
-        }
-
-        return error_messages;
 
         //users_list.add(UsersClass("","","","","","","","","",""));
 

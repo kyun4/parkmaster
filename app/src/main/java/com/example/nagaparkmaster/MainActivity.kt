@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics);
 
         val textview_signup_params = text_signup.layoutParams
-        textview_signup_params.width = displayMetrics.widthPixels/7;
+        textview_signup_params.width = displayMetrics.widthPixels/4;
 
         val edittext_email = findViewById<EditText>(R.id.email_login);
         val edittext_password = findViewById<EditText>(R.id.password_login);
