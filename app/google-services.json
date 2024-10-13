@@ -1,26 +1,45 @@
 {
   "project_info": {
-    "project_number": "170059268264",
-    "project_id": "naga-park-master",
-    "storage_bucket": "naga-park-master.appspot.com"
+    "project_number": "686996717913",
+    "firebase_url": "https://naga-park-master-ec7f7-default-rtdb.firebaseio.com",
+    "project_id": "naga-park-master-ec7f7",
+    "storage_bucket": "naga-park-master-ec7f7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:170059268264:android:151fc459b756d168a4829d",
+        "mobilesdk_app_id": "1:686996717913:android:06d3c16dba038dd8c68c48",
         "android_client_info": {
           "package_name": "com.example.nagaparkmaster"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "686996717913-v9eacjd8ubq611varagpvbsfn5q7km6q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nagaparkmaster",
+            "certificate_hash": "2d928d6c23727d39e5ad1d73d11eed2b3de252d8"
+          }
+        },
+        {
+          "client_id": "686996717913-2nk67468et8vmup4q29mvhv7dh7uv9lh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEH6ZwHip3IlZwYqPjYT8gFhbc2kVdZ3w"
+          "current_key": "AIzaSyAT_nPos31aRNqErbG-JgsPssh9ix9a6p4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686996717913-2nk67468et8vmup4q29mvhv7dh7uv9lh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
