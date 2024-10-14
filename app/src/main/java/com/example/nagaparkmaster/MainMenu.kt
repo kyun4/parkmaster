@@ -112,24 +112,11 @@ class MainMenu : AppCompatActivity() {
             ), drawerLayout
         )
 
-        button_avail_parking_slot.setOnClickListener {
-            val intent = Intent(this, ChooseNearestParking::class.java)
-            startActivity(intent)
-        }
 
 
 
 
 
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.nav_home -> {
-                    Toast.makeText(baseContext, "", Toast.LENGTH_LONG).show()
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START);
-            true
-        }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
