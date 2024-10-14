@@ -3,6 +3,8 @@ package com.example.nagaparkmaster
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Button
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -12,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.example.nagaparkmaster.databinding.ActivityMainMenuBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -47,13 +50,37 @@ class MainMenu : AppCompatActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main_menu)
+        val button_avail_parking_slot: Button = findViewById(R.id.buttonReservePark);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_parking_history, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_parking_history, R.id.nav_transaction
             ), drawerLayout
         )
+
+        button_avail_parking_slot.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+
+            Toast.makeText(this, menuItem.itemId.toString(), Toast.LENGTH_LONG).show();
+
+            when(menuItem.itemId){
+                R.id.nav_account -> {
+                    val intent = Intent(this, AccountProfile::class.java)
+                    startActivity(intent)
+                }
+            }
+
+
+
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

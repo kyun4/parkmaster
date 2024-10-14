@@ -1,4 +1,4 @@
-package com.example.nagaparkmaster.ui.parking_history;
+package com.example.nagaparkmaster.ui.transaction;
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 
-import com.example.nagaparkmaster.databinding.FragmentParkingHistoryBinding
+import com.example.nagaparkmaster.databinding.FragmentTransactionBinding
+import com.example.nagaparkmaster.ui.transaction.TransactionViewModel
 
-class ParkingHistoryFragment : Fragment() {
+class TransactionFragment : Fragment() {
 
-    private var _binding: FragmentParkingHistoryBinding? = null
+    private var _binding: FragmentTransactionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,14 +25,14 @@ class ParkingHistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val parkingHistoryViewModel =
-            ViewModelProvider(this).get(ParkingHistoryViewModel::class.java)
+        val transactionViewModel =
+            ViewModelProvider(this).get(TransactionViewModel::class.java)
 
-        _binding = FragmentParkingHistoryBinding.inflate(inflater, container, false)
+        _binding = FragmentTransactionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textParkingHistory
-        parkingHistoryViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textTransaction
+        transactionViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

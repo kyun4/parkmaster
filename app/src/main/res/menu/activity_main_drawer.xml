@@ -9,10 +9,7 @@
             android:icon="@drawable/home1"
             android:title="@string/menu_home" />
 
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/user04"
-            android:title="@string/menu_account" />
+
 
         <item
             android:id="@+id/nav_parking_history"
@@ -22,5 +19,11 @@
             android:id="@+id/nav_transaction"
             android:icon="@drawable/transaction1"
             android:title="@string/menu_transaction" />
+
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/user04"
+            android:title="@string/menu_account" />
+
     </group>
 </menu>
